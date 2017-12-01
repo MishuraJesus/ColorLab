@@ -8,10 +8,12 @@
 
 import UIKit
 
-class RGBColorUITextField: UITextField, UITextFieldDelegate {
 
-    @IBOutlet weak var redTextField: UITextField!
-    @IBOutlet weak var greenTextField: UITextField!
-    @IBOutlet weak var blueTextField: UITextField!
 
+class RGBColorUITextField: UITextField {
+
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 5.0
+        self.clipsToBounds = true
+    }
 }

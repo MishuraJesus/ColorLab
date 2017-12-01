@@ -29,7 +29,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbB-YQ-dI9">
                                 <rect key="frame" x="60" y="28" width="255" height="255"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.73945038969999999" green="1" blue="0.2156295077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YbB-YQ-dI9" secondAttribute="height" multiplier="1:1" id="dA6-Ly-CYG"/>
                                 </constraints>
@@ -68,8 +68,11 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ACy-Z9-ckL">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                         <subviews>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hfL-y2-sLX">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="hfL-y2-sLX">
                                                 <rect key="frame" x="-2" y="0.0" width="279" height="31"/>
+                                                <connections>
+                                                    <action selector="rgbSliderValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="s8V-1G-bCS"/>
+                                                </connections>
                                             </slider>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OAm-fq-iSc">
                                                 <rect key="frame" x="290" y="0.0" width="45" height="30"/>
@@ -80,7 +83,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="255" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O2T-aq-HZf">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="O2T-aq-HZf" customClass="RGBColorUITextField" customModule="ColorLab" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
                                                         <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="0.24189319349315069" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -88,7 +91,10 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                        <connections>
+                                                            <action selector="rgbTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="Jh3-UT-bdB"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -97,19 +103,22 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="60D-mb-R6K">
                                         <rect key="frame" x="0.0" y="77.5" width="335" height="30"/>
                                         <subviews>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="SOT-Zz-9D3">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="SOT-Zz-9D3">
                                                 <rect key="frame" x="-2" y="0.0" width="279" height="31"/>
+                                                <connections>
+                                                    <action selector="rgbSliderValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="ctT-Wf-41Y"/>
+                                                </connections>
                                             </slider>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pon-fl-PWB">
                                                 <rect key="frame" x="290" y="0.0" width="45" height="30"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWT-rq-scc">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="G:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWT-rq-scc">
                                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="255" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0WU-Iv-mqD">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="0WU-Iv-mqD" customClass="RGBColorUITextField" customModule="ColorLab" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
                                                         <color key="backgroundColor" red="0.45009386540000001" green="0.98132258650000004" blue="0.4743030667" alpha="0.22923801369863014" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -118,6 +127,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="rgbTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="vE0-jh-xd8"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -126,19 +138,22 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xAz-gZ-97T">
                                         <rect key="frame" x="0.0" y="155" width="335" height="30"/>
                                         <subviews>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KvU-eY-a66">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="KvU-eY-a66">
                                                 <rect key="frame" x="-2" y="0.0" width="279" height="31"/>
+                                                <connections>
+                                                    <action selector="rgbSliderValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="49b-2q-S3f"/>
+                                                </connections>
                                             </slider>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6R-2P-dh3">
                                                 <rect key="frame" x="290" y="0.0" width="45" height="30"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJ6-b2-VX8">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJ6-b2-VX8">
                                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="255" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="38Y-00-AG9">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="38Y-00-AG9" customClass="RGBColorUITextField" customModule="ColorLab" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
                                                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="0.2401273544520548" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -147,6 +162,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="rgbTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="uRJ-Pm-oa9"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -184,9 +202,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="REM-I1-rOe"/>
                     <connections>
-                        <outlet property="text1" destination="O2T-aq-HZf" id="Si6-ve-5qH"/>
-                        <outlet property="text2" destination="0WU-Iv-mqD" id="cUH-IN-YA3"/>
-                        <outlet property="text3" destination="38Y-00-AG9" id="KFt-ad-3Rg"/>
+                        <outlet property="blueSlider" destination="KvU-eY-a66" id="pJt-EN-Pdv"/>
+                        <outlet property="blueTextField" destination="38Y-00-AG9" id="KFt-ad-3Rg"/>
+                        <outlet property="colorView" destination="YbB-YQ-dI9" id="c97-5J-8pu"/>
+                        <outlet property="greenSlider" destination="SOT-Zz-9D3" id="Wi3-5g-epj"/>
+                        <outlet property="greenTextField" destination="0WU-Iv-mqD" id="cUH-IN-YA3"/>
+                        <outlet property="redSlider" destination="hfL-y2-sLX" id="i2V-Sc-vZL"/>
+                        <outlet property="redTextField" destination="O2T-aq-HZf" id="UAr-k3-dZ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -199,6 +221,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VVP-VL-6in" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b5Q-vo-sfC">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
