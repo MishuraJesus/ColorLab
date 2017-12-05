@@ -12,6 +12,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var colorView: UIView!
     
+    @IBOutlet weak var hexTextField: UITextField!
+    @IBOutlet weak var hexView: UIView!
+    
     @IBOutlet weak var redSlider: UISlider!
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
@@ -28,6 +31,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         greenTextField.delegate = self
         blueTextField.delegate = self
         
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dissmissKeyboard() {
+        view.endEditing(true)
     }
     
     //MARK: - TextFieldAnimation
@@ -51,6 +60,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField)
     {
         self.animateTextField(up: false)
+        
+        guard let text = textField.text else { return }
+        
+        if text == "" {
+            textField.text = "\(0)"
+            
+            switch textField {
+            case redTextField:
+                redSlider.value = Float(textField.text!)!
+            case greenTextField:
+                greenSlider.value = Float(textField.text!)!
+            case blueTextField:
+                blueSlider.value = Float(textField.text!)!
+            default: return
+            }
+            
+            colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
+            hexTextField.text = colorView.backgroundColor!.toHexString
+            hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -65,13 +94,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         switch slider {
         case redSlider: redTextField.text = "\(Int(slider.value))"
-            colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
         case greenSlider: greenTextField.text = "\(Int(slider.value))"
-            colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
         case blueSlider: blueTextField.text = "\(Int(slider.value))"
-            colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
         default: return
         }
+        
+        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
+        hexTextField.text = colorView.backgroundColor!.toHexString
+        hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
     }
     
     @IBAction func rgbTextFieldEditingChanged(sender: AnyObject) {
@@ -92,6 +122,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
+        hexTextField.text = colorView.backgroundColor!.toHexString
+        hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
     }
     
 }

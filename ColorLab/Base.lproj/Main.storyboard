@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VVP-VL-6in">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VVP-VL-6in">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,9 +27,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbB-YQ-dI9">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbB-YQ-dI9" customClass="ColorUIView" customModule="ColorLab" customModuleProvider="target">
                                 <rect key="frame" x="60" y="28" width="255" height="255"/>
-                                <color key="backgroundColor" red="0.73945038969999999" green="1" blue="0.2156295077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YbB-YQ-dI9" secondAttribute="height" multiplier="1:1" id="dA6-Ly-CYG"/>
                                 </constraints>
@@ -37,16 +37,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#FFFFFF" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WvP-hK-iep">
-                                <rect key="frame" x="105" y="301" width="165" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="165" id="SRg-sl-EYb"/>
-                                    <constraint firstAttribute="height" constant="45" id="nxr-0Y-d3M"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="KlG-Vv-AnV">
                                 <rect key="frame" x="30" y="361" width="315" height="32"/>
                                 <subviews>
@@ -180,23 +170,55 @@
                                 </constraints>
                                 <state key="normal" image="copy"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dwn-4n-qpI" customClass="hexUIView" customModule="ColorLab" customModuleProvider="target">
+                                <rect key="frame" x="105" y="301" width="165" height="45"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zkb-H4-wPb">
+                                        <rect key="frame" x="23" y="2" width="142" height="41"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xG9-6J-CZZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="17" height="41"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="RQf-jP-6Uf">
+                                                <rect key="frame" x="17" y="0.0" width="125" height="41"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="125" id="ptg-Cj-u7r"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zkb-H4-wPb" firstAttribute="centerY" secondItem="Dwn-4n-qpI" secondAttribute="centerY" id="3VP-HH-6sV"/>
+                                    <constraint firstAttribute="trailing" secondItem="zkb-H4-wPb" secondAttribute="trailing" id="8Wm-mX-mLv"/>
+                                    <constraint firstAttribute="height" constant="45" id="TXc-oL-vBq"/>
+                                    <constraint firstAttribute="width" constant="165" id="yex-4W-BwH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TDT-rY-VRs" firstAttribute="top" secondItem="YbB-YQ-dI9" secondAttribute="bottom" constant="18" id="0XB-Tt-2dm"/>
-                            <constraint firstItem="KlG-Vv-AnV" firstAttribute="top" secondItem="WvP-hK-iep" secondAttribute="bottom" constant="15" id="0mT-x4-0C1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rdh-dB-d6P" secondAttribute="bottom" constant="20" id="3mL-Rw-bbl"/>
                             <constraint firstItem="rdh-dB-d6P" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5WE-QM-EEM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KlG-Vv-AnV" secondAttribute="trailing" constant="30" id="Bb3-rn-8ch"/>
+                            <constraint firstItem="KlG-Vv-AnV" firstAttribute="top" secondItem="Dwn-4n-qpI" secondAttribute="bottom" constant="15" id="D2w-ga-YGO"/>
                             <constraint firstItem="KlG-Vv-AnV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="F1V-lb-iid"/>
-                            <constraint firstItem="TDT-rY-VRs" firstAttribute="leading" secondItem="WvP-hK-iep" secondAttribute="trailing" constant="8" id="G8U-UA-JHl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YbB-YQ-dI9" secondAttribute="trailing" constant="60" id="OXd-CA-QhO"/>
                             <constraint firstItem="rdh-dB-d6P" firstAttribute="top" secondItem="KlG-Vv-AnV" secondAttribute="bottom" constant="20" id="UIv-0g-atR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rdh-dB-d6P" secondAttribute="trailing" constant="20" id="Zcf-v9-oI2"/>
                             <constraint firstItem="YbB-YQ-dI9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="e91-13-1Ig"/>
-                            <constraint firstItem="WvP-hK-iep" firstAttribute="top" secondItem="YbB-YQ-dI9" secondAttribute="bottom" constant="18" id="g9T-nx-bZ8"/>
+                            <constraint firstItem="Dwn-4n-qpI" firstAttribute="top" secondItem="YbB-YQ-dI9" secondAttribute="bottom" constant="18" id="ipB-Sb-1kW"/>
+                            <constraint firstItem="Dwn-4n-qpI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nel-05-h1V"/>
+                            <constraint firstItem="TDT-rY-VRs" firstAttribute="leading" secondItem="Dwn-4n-qpI" secondAttribute="trailing" constant="8" id="pHc-NM-7dA"/>
                             <constraint firstItem="YbB-YQ-dI9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="yu0-Bn-Vfp"/>
-                            <constraint firstItem="WvP-hK-iep" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zSk-AH-6Ay"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -207,6 +229,8 @@
                         <outlet property="colorView" destination="YbB-YQ-dI9" id="c97-5J-8pu"/>
                         <outlet property="greenSlider" destination="SOT-Zz-9D3" id="Wi3-5g-epj"/>
                         <outlet property="greenTextField" destination="0WU-Iv-mqD" id="cUH-IN-YA3"/>
+                        <outlet property="hexTextField" destination="RQf-jP-6Uf" id="8sw-qf-Jdo"/>
+                        <outlet property="hexView" destination="Dwn-4n-qpI" id="lGz-a4-4uH"/>
                         <outlet property="redSlider" destination="hfL-y2-sLX" id="i2V-Sc-vZL"/>
                         <outlet property="redTextField" destination="O2T-aq-HZf" id="UAr-k3-dZ9"/>
                     </connections>
