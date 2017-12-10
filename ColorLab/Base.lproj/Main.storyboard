@@ -189,7 +189,10 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <connections>
+                                                    <action selector="hexTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="Qcu-K7-sBr"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>

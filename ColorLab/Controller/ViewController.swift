@@ -89,7 +89,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - IBAction
-    @IBAction func rgbSliderValueChanged(sender: AnyObject) {
+    @IBAction func rgbSliderValueChanged(sender: Any) {
         guard let slider = sender as? UISlider else { return }
         
         switch slider {
@@ -104,7 +104,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
     }
     
-    @IBAction func rgbTextFieldEditingChanged(sender: AnyObject) {
+    @IBAction func rgbTextFieldEditingChanged(sender: Any) {
         guard let textField = sender as? UITextField else { return }
         guard let text = textField.text else { return }
         guard let value = Int(text) else { return }
@@ -126,5 +126,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
         hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
     }
     
+    @IBAction func hexTextFieldEditingChanged(sender: Any) {
+        guard let textField = sender as? UITextField else { return }
+        guard let text = textField.text else { return }
+        if text.count == 6 {
+            // TODO: Redo the algorithm
+            let hexLetters = "0123456789abcdef"
+            var occurenceNumber = 0
+            for letter in text.lowercased() {
+                for hexLetter in hexLetters {
+                    if letter == hexLetter {
+                        occurenceNumber += 1
+                    }
+                }
+            }
+            if occurenceNumber == 6 {
+                let color = UIColor.color(fromHexString: text)
+                colorView.backgroundColor = color
+                print(color.toHexString)
+                
+                let red = Int(color.redValue * 255)
+                let green = Int(color.greenValue * 255)
+                let blue = Int(color.blueValue * 255)
+                
+                redSlider.value = Float(red)
+                greenSlider.value = Float(green)
+                blueSlider.value = Float(blue)
+                
+                redTextField.text = "\(red)"
+                greenTextField.text = "\(green)"
+                blueTextField.text = "\(blue)"
+                
+                hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
+            }
+        }
+    }
 }
 
