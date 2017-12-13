@@ -22,7 +22,7 @@
         <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ColorLab" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="NewColorViewController" customModule="ColorLab" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,6 +44,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="127.5" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Random"/>
+                                        <connections>
+                                            <action selector="randomButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xxi-2u-3Zw"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfH-YY-2a8">
                                         <rect key="frame" x="187.5" y="0.0" width="127.5" height="32"/>
@@ -116,7 +119,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <action selector="rgbTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="vE0-jh-xd8"/>
                                                         </connections>
@@ -151,7 +154,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <action selector="rgbTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="uRJ-Pm-oa9"/>
                                                         </connections>
@@ -189,7 +192,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 <connections>
                                                     <action selector="hexTextFieldEditingChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="Qcu-K7-sBr"/>
                                                 </connections>
@@ -236,11 +239,42 @@
                         <outlet property="hexView" destination="Dwn-4n-qpI" id="lGz-a4-4uH"/>
                         <outlet property="redSlider" destination="hfL-y2-sLX" id="i2V-Sc-vZL"/>
                         <outlet property="redTextField" destination="O2T-aq-HZf" id="UAr-k3-dZ9"/>
+                        <segue destination="2SP-sR-9Qx" kind="presentation" identifier="showColor" animates="NO" modalTransitionStyle="crossDissolve" id="hdL-Qn-EVD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="133.5832083958021"/>
+            <point key="canvasLocation" x="466" y="-197"/>
+        </scene>
+        <!--Full Color View Controller-->
+        <scene sceneID="GVZ-dC-w76">
+            <objects>
+                <viewController id="2SP-sR-9Qx" customClass="FullColorViewController" customModule="ColorLab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t8v-Je-PF1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut6-Cc-d8O">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ut6-Cc-d8O" firstAttribute="leading" secondItem="nsO-X4-Dv2" secondAttribute="leading" id="MCM-8C-RVH"/>
+                            <constraint firstAttribute="bottom" secondItem="ut6-Cc-d8O" secondAttribute="bottom" id="NZs-ky-jJd"/>
+                            <constraint firstItem="ut6-Cc-d8O" firstAttribute="top" secondItem="t8v-Je-PF1" secondAttribute="top" id="T5G-p8-rme"/>
+                            <constraint firstItem="nsO-X4-Dv2" firstAttribute="trailing" secondItem="ut6-Cc-d8O" secondAttribute="trailing" id="qTf-Lq-5gZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nsO-X4-Dv2"/>
+                    </view>
+                    <connections>
+                        <outlet property="fullColorView" destination="ut6-Cc-d8O" id="5iJ-bg-EzU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CPi-Pc-NeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1298.4000000000001" y="-198.35082458770617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3Jw-1x-tuD">
@@ -254,11 +288,41 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="NYd-65-b2Q"/>
+                        <segue destination="LM7-mN-U20" kind="relationship" relationship="viewControllers" id="Uro-DI-eJb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uuV-F4-OJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-398" y="134"/>
+            <point key="canvasLocation" x="-510" y="133"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="IJZ-nd-a1v">
+            <objects>
+                <tableViewController id="LM7-mN-U20" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q1q-5P-54m">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="tVf-Dx-n73">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tVf-Dx-n73" id="vez-gu-ihT">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LM7-mN-U20" id="At1-2G-SMw"/>
+                            <outlet property="delegate" destination="LM7-mN-U20" id="G30-Hn-gS0"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="Byj-8d-1Za"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="axq-U4-TY3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="459" y="485"/>
         </scene>
     </scenes>
     <resources>

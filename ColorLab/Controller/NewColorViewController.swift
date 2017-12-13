@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class NewColorViewController: UIViewController, UITextFieldDelegate {
+    
+    //MARK: - IBOutlets
     
     @IBOutlet weak var colorView: UIView!
     
@@ -23,20 +25,63 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var greenTextField: UITextField!
     @IBOutlet weak var blueTextField: UITextField!
     
-
+    var textFieldTag: Int! // TextField tag: 0 - red, 1 - greeen, 2 - blue
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hexTextField.delegate = self
         
         redTextField.delegate = self
         greenTextField.delegate = self
         blueTextField.delegate = self
         
-        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard))
-        view.addGestureRecognizer(tap)
+        let tapHideKeyboard: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard))
+        
+        view.addGestureRecognizer(tapHideKeyboard)
+        
+        let tapShowFullColor: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showFullColor))
+        colorView.addGestureRecognizer(tapShowFullColor)
+        
+        addDoneButtonOnKeyboard()
     }
     
     @objc func dissmissKeyboard() {
         view.endEditing(true)
+    }
+    
+    //MARK: - Show Full Color
+    @objc func showFullColor() {
+        performSegue(withIdentifier: "showColor", sender: nil)
+    }
+    
+    //MARK: - Done Button
+    func addDoneButtonOnKeyboard() {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.redTextField.inputAccessoryView = doneToolbar
+        self.greenTextField.inputAccessoryView = doneToolbar
+        self.blueTextField.inputAccessoryView = doneToolbar
+    }
+    
+    @objc func doneButtonAction() {
+        switch textFieldTag {
+        case 0: redTextField.resignFirstResponder()
+        case 1: greenTextField.resignFirstResponder()
+        case 2: blueTextField.resignFirstResponder()
+        default: break
+        }
     }
     
     //MARK: - TextFieldAnimation
@@ -54,11 +99,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField)
     {
+        // Check that textField is not the hexTextField not to invoke animation
+        if (textField != hexTextField) {
+        
         self.animateTextField(up: true)
+        
+        switch textField {
+            case redTextField: textFieldTag = 0
+            case greenTextField: textFieldTag = 1
+            case blueTextField: textFieldTag = 2
+            default: return
+        }
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField)
     {
+        // Check that textField is not the hexTextField not to do animation related stuff
+        if (textField != hexTextField) {
         self.animateTextField(up: false)
         
         guard let text = textField.text else { return }
@@ -80,6 +138,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             hexTextField.text = colorView.backgroundColor!.toHexString
             hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
         }
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -88,10 +147,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    //MARK: - Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showColor", let controller = segue.destination as? FullColorViewController {
+            controller.color = colorView.backgroundColor!
+        }
+    }
+    
     //MARK: - IBAction
     @IBAction func rgbSliderValueChanged(sender: Any) {
         guard let slider = sender as? UISlider else { return }
         
+        // Update color textField value
         switch slider {
         case redSlider: redTextField.text = "\(Int(slider.value))"
         case greenSlider: greenTextField.text = "\(Int(slider.value))"
@@ -109,8 +176,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         guard let text = textField.text else { return }
         guard let value = Int(text) else { return }
         
+        // For comfort if user inputs value bigger than '255' just set it to be '255'
         textField.text = value > 255 ? "\(255)" : "\(value)"
         
+        // Update color slider value
         switch textField {
         case redTextField:
             redSlider.value = Float(textField.text!)!
@@ -129,8 +198,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hexTextFieldEditingChanged(sender: Any) {
         guard let textField = sender as? UITextField else { return }
         guard let text = textField.text else { return }
+        
+        // Algorithm: Checks that the user input consists of only hex letters like '0123456789abcdef'
+        // Perform updating of all values only if number of occurences is 6
         if text.count == 6 {
-            // TODO: Redo the algorithm
             let hexLetters = "0123456789abcdef"
             var occurenceNumber = 0
             for letter in text.lowercased() {
@@ -140,6 +211,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
+            // Update all values
             if occurenceNumber == 6 {
                 let color = UIColor.color(fromHexString: text)
                 colorView.backgroundColor = color
@@ -160,6 +232,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
             }
         }
+    }
+    
+    @IBAction func randomButtonPressed(sender: Any) {
+        
+        let red = Int(arc4random_uniform(256))
+        let green = Int(arc4random_uniform(256))
+        let blue = Int(arc4random_uniform(256))
+        
+        redSlider.value = Float(red)
+        greenSlider.value = Float(green)
+        blueSlider.value = Float(blue)
+        
+        redTextField.text = "\(red)"
+        greenTextField.text = "\(green)"
+        blueTextField.text = "\(blue)"
+        
+        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        hexTextField.text = colorView.backgroundColor!.toHexString
+        hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
     }
 }
 
