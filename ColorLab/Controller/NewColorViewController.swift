@@ -27,6 +27,16 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     
     var textFieldTag: Int! // TextField tag: 0 - red, 1 - greeen, 2 - blue
     
+    var hexValueIsCorrect: Bool! { // If hexTextField text consists only from hex letter - true, else - false
+        didSet {
+            if hexValueIsCorrect {
+                hexView.layer.borderWidth = 0
+            } else {
+                hexView.layer.borderWidth = 1
+                hexView.layer.borderColor = UIColor.red.cgColor
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +125,13 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField)
     {
+//        if textField == hexTextField {
+//            if (!hexValueIsCorrect) {
+//                hexView.layer.borderWidth = 1
+//                hexView.layer.borderColor = UIColor.red.cgColor
+//
+//        }
+//        }
         // Check that textField is not the hexTextField not to do animation related stuff
         if (textField != hexTextField) {
         self.animateTextField(up: false)
@@ -155,8 +172,46 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - IBAction
+    @IBAction func copyButtonTapped(sender: Any) {
+        
+        if let button = sender as? UIButton {
+            button.backgroundColor = UIColor.white
+        }
+        
+        if !hexValueIsCorrect {
+            
+            let alertController = UIAlertController(title: "Invalid Hex Value", message: nil, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            
+            alertController.addAction(okAction)
+            
+            show(alertController, sender: nil)
+            
+        }
+        
+        guard let text = hexTextField.text else { print("EMPTY");return }
+        
+        UIPasteboard.general.string = "#\(text)"
+    }
+    
+    @IBAction func copyButtonHoldDown(sender: Any) {
+        if let button = sender as? UIButton {
+            button.backgroundColor = UIColor(red: 231/255, green: 231/255, blue: 232/255, alpha: 1)
+        }
+    }
+    
+    @IBAction func copyButtonTouchDragOutside(sender: Any)
+    {
+        if let button = sender as? UIButton {
+            button.backgroundColor = UIColor.white
+        }
+    }
+    
     @IBAction func rgbSliderValueChanged(sender: Any) {
         guard let slider = sender as? UISlider else { return }
+        
+        hexValueIsCorrect = true
         
         // Update color textField value
         switch slider {
@@ -175,6 +230,8 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
         guard let textField = sender as? UITextField else { return }
         guard let text = textField.text else { return }
         guard let value = Int(text) else { return }
+        
+        hexValueIsCorrect = true
         
         // For comfort if user inputs value bigger than '255' just set it to be '255'
         textField.text = value > 255 ? "\(255)" : "\(value)"
@@ -199,6 +256,7 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
         guard let textField = sender as? UITextField else { return }
         guard let text = textField.text else { return }
         
+        
         // Algorithm: Checks that the user input consists of only hex letters like '0123456789abcdef'
         // Perform updating of all values only if number of occurences is 6
         if text.count == 6 {
@@ -213,6 +271,9 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
             }
             // Update all values
             if occurenceNumber == 6 {
+                hexValueIsCorrect = true
+                hexView.layer.borderWidth = 0
+                
                 let color = UIColor.color(fromHexString: text)
                 colorView.backgroundColor = color
                 print(color.toHexString)
@@ -230,11 +291,16 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
                 blueTextField.text = "\(blue)"
                 
                 hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
+            } else {
+                hexValueIsCorrect = false
+                hexView.layer.borderWidth = 1
+                hexView.layer.borderColor = UIColor.red.cgColor
             }
         }
     }
     
     @IBAction func randomButtonPressed(sender: Any) {
+        hexValueIsCorrect = true
         
         let red = Int(arc4random_uniform(256))
         let green = Int(arc4random_uniform(256))

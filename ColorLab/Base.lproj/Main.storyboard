@@ -165,13 +165,18 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDT-rY-VRs">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDT-rY-VRs" customClass="CopyButton" customModule="ColorLab" customModuleProvider="target">
                                 <rect key="frame" x="278" y="301" width="33" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="cDk-eZ-dzE"/>
                                     <constraint firstAttribute="width" constant="33" id="h0D-xQ-WgF"/>
                                 </constraints>
                                 <state key="normal" image="copy"/>
+                                <connections>
+                                    <action selector="copyButtonHoldDownWithSender:" destination="BYZ-38-t0r" eventType="touchDown" id="saV-0M-j0Z"/>
+                                    <action selector="copyButtonTappedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZwI-Kx-Nim"/>
+                                    <action selector="copyButtonTouchDragOutsideWithSender:" destination="BYZ-38-t0r" eventType="touchDragOutside" id="hpk-Kx-9aV"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dwn-4n-qpI" customClass="hexUIView" customModule="ColorLab" customModuleProvider="target">
                                 <rect key="frame" x="105" y="301" width="165" height="45"/>
