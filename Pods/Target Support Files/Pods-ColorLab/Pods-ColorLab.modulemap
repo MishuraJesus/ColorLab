@@ -1,0 +1,6 @@
+framework module Pods_ColorLab {
+  umbrella header "Pods-ColorLab-umbrella.h"
+
+  export *
+  module * { export * }
+}

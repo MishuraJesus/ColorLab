@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		034B6FE3EBBDF2F2872103C1 /* Pods_ColorLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553FDBCF581DB1E229E9425 /* Pods_ColorLab.framework */; };
 		7C0EC67B1FD2AB6B000EBE50 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EC67A1FD2AB6B000EBE50 /* UIColorExtension.swift */; };
 		7C1F481B1FD17615006B36D3 /* RGBColorUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F481A1FD17615006B36D3 /* RGBColorUITextField.swift */; };
 		7C2DCB621FBE03BD00241CE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DCB611FBE03BD00241CE0 /* AppDelegate.swift */; };
@@ -36,6 +37,9 @@
 		7CBD25D11FE1DDA400453CAF /* FullColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullColorViewController.swift; sourceTree = "<group>"; };
 		7CBD25D31FE2BBA900453CAF /* CopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyButton.swift; sourceTree = "<group>"; };
 		7CFFB08D1FD11AC0006AF10D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		96D36705F0F875774279715B /* Pods-ColorLab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorLab.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorLab/Pods-ColorLab.release.xcconfig"; sourceTree = "<group>"; };
+		A058B551C976B64DE5D35ED5 /* Pods-ColorLab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorLab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorLab/Pods-ColorLab.debug.xcconfig"; sourceTree = "<group>"; };
+		B553FDBCF581DB1E229E9425 /* Pods_ColorLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +47,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034B6FE3EBBDF2F2872103C1 /* Pods_ColorLab.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C440B89B30720C76E4313C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B553FDBCF581DB1E229E9425 /* Pods_ColorLab.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7C0EC6791FD2AA67000EBE50 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +102,8 @@
 			children = (
 				7C2DCB601FBE03BD00241CE0 /* ColorLab */,
 				7C2DCB5F1FBE03BD00241CE0 /* Products */,
+				9DE12B1D7F24CB0A4B525D87 /* Pods */,
+				6C440B89B30720C76E4313C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +132,15 @@
 			path = ColorLab;
 			sourceTree = "<group>";
 		};
+		9DE12B1D7F24CB0A4B525D87 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A058B551C976B64DE5D35ED5 /* Pods-ColorLab.debug.xcconfig */,
+				96D36705F0F875774279715B /* Pods-ColorLab.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,9 +148,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C2DCB731FBE03BD00241CE0 /* Build configuration list for PBXNativeTarget "ColorLab" */;
 			buildPhases = (
+				966DB6A7FC58DA30E7113003 /* [CP] Check Pods Manifest.lock */,
 				7C2DCB5A1FBE03BD00241CE0 /* Sources */,
 				7C2DCB5B1FBE03BD00241CE0 /* Frameworks */,
 				7C2DCB5C1FBE03BD00241CE0 /* Resources */,
+				46804FA776D76FB2808DC3BA /* [CP] Embed Pods Frameworks */,
+				D29A40B6A6EFAD738EE01C10 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -183,6 +210,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		46804FA776D76FB2808DC3BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ColorLab/Pods-ColorLab-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorLab/Pods-ColorLab-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		966DB6A7FC58DA30E7113003 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ColorLab-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D29A40B6A6EFAD738EE01C10 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorLab/Pods-ColorLab-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7C2DCB5A1FBE03BD00241CE0 /* Sources */ = {
@@ -332,6 +413,7 @@
 		};
 		7C2DCB741FBE03BD00241CE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A058B551C976B64DE5D35ED5 /* Pods-ColorLab.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -347,6 +429,7 @@
 		};
 		7C2DCB751FBE03BD00241CE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96D36705F0F875774279715B /* Pods-ColorLab.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

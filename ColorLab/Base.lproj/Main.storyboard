@@ -190,7 +190,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="RQf-jP-6Uf">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="000000" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="RQf-jP-6Uf">
                                                 <rect key="frame" x="17" y="0.0" width="125" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="125" id="ptg-Cj-u7r"/>
@@ -205,7 +205,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.1974529109589041" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="zkb-H4-wPb" firstAttribute="centerY" secondItem="Dwn-4n-qpI" secondAttribute="centerY" id="3VP-HH-6sV"/>
                                     <constraint firstAttribute="trailing" secondItem="zkb-H4-wPb" secondAttribute="trailing" id="8Wm-mX-mLv"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class NewColorViewController: UIViewController, UITextFieldDelegate {
     
@@ -27,7 +28,7 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     
     var textFieldTag: Int! // TextField tag: 0 - red, 1 - greeen, 2 - blue
     
-    var hexValueIsCorrect: Bool! { // If hexTextField text consists only from hex letter - true, else - false
+    var hexValueIsCorrect = true { // If hexTextField text consists only from hex letter - true, else - false
         didSet {
             if hexValueIsCorrect {
                 hexView.layer.borderWidth = 0
@@ -190,9 +191,12 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
             
         }
         
-        guard let text = hexTextField.text else { print("EMPTY");return }
+        guard let text = hexTextField.text else { return }
         
         UIPasteboard.general.string = "#\(text)"
+        
+        self.view.makeToast("HEX Copied", duration: 2.0, point: CGPoint(x: self.view.bounds.size.width / 2.0, y: hexView.frame.maxY + 30.0), title: nil, image: nil, style: ToastStyle(), completion: nil)
+        
     }
     
     @IBAction func copyButtonHoldDown(sender: Any) {
@@ -293,9 +297,9 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
                 hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
             } else {
                 hexValueIsCorrect = false
-                hexView.layer.borderWidth = 1
-                hexView.layer.borderColor = UIColor.red.cgColor
             }
+        } else if text.count > 6 {
+            hexValueIsCorrect = false
         }
     }
     
