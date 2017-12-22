@@ -10,6 +10,8 @@
 		034B6FE3EBBDF2F2872103C1 /* Pods_ColorLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553FDBCF581DB1E229E9425 /* Pods_ColorLab.framework */; };
 		7C0EC67B1FD2AB6B000EBE50 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EC67A1FD2AB6B000EBE50 /* UIColorExtension.swift */; };
 		7C1F481B1FD17615006B36D3 /* RGBColorUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F481A1FD17615006B36D3 /* RGBColorUITextField.swift */; };
+		7C2776051FEB026F008B5163 /* SavedColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2776041FEB026F008B5163 /* SavedColorsViewController.swift */; };
+		7C2776071FEB0E61008B5163 /* colorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2776061FEB0E61008B5163 /* colorTableViewCell.swift */; };
 		7C2DCB621FBE03BD00241CE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DCB611FBE03BD00241CE0 /* AppDelegate.swift */; };
 		7C2DCB641FBE03BD00241CE0 /* NewColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DCB631FBE03BD00241CE0 /* NewColorViewController.swift */; };
 		7C2DCB671FBE03BD00241CE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DCB651FBE03BD00241CE0 /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		7C0EC67A1FD2AB6B000EBE50 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		7C1F481A1FD17615006B36D3 /* RGBColorUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBColorUITextField.swift; sourceTree = "<group>"; };
+		7C2776041FEB026F008B5163 /* SavedColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorsViewController.swift; sourceTree = "<group>"; };
+		7C2776061FEB0E61008B5163 /* colorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorTableViewCell.swift; sourceTree = "<group>"; };
 		7C2DCB5E1FBE03BD00241CE0 /* ColorLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2DCB611FBE03BD00241CE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C2DCB631FBE03BD00241CE0 /* NewColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewColorViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 			children = (
 				7C2DCB631FBE03BD00241CE0 /* NewColorViewController.swift */,
 				7CBD25D11FE1DDA400453CAF /* FullColorViewController.swift */,
+				7C2776041FEB026F008B5163 /* SavedColorsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -86,6 +91,7 @@
 				7C4DD7F81FD74FDB00AE7D29 /* ColorUIView.swift */,
 				7C4DD7FA1FD7559A00AE7D29 /* hexUIView.swift */,
 				7CBD25D31FE2BBA900453CAF /* CopyButton.swift */,
+				7C2776061FEB0E61008B5163 /* colorTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -93,6 +99,7 @@
 		7C1F48191FD175C8006B36D3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C2DCB681FBE03BD00241CE0 /* ColorLab.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -126,7 +133,6 @@
 				7C2DCB651FBE03BD00241CE0 /* Main.storyboard */,
 				7C2DCB6D1FBE03BD00241CE0 /* LaunchScreen.storyboard */,
 				7C2DCB701FBE03BD00241CE0 /* Info.plist */,
-				7C2DCB681FBE03BD00241CE0 /* ColorLab.xcdatamodeld */,
 				7CFFB08D1FD11AC0006AF10D /* Assets.xcassets */,
 			);
 			path = ColorLab;
@@ -274,9 +280,11 @@
 				7CBD25D41FE2BBA900453CAF /* CopyButton.swift in Sources */,
 				7CBD25D21FE1DDA400453CAF /* FullColorViewController.swift in Sources */,
 				7C4DD7FB1FD7559A00AE7D29 /* hexUIView.swift in Sources */,
+				7C2776051FEB026F008B5163 /* SavedColorsViewController.swift in Sources */,
 				7C2DCB641FBE03BD00241CE0 /* NewColorViewController.swift in Sources */,
 				7C1F481B1FD17615006B36D3 /* RGBColorUITextField.swift in Sources */,
 				7C0EC67B1FD2AB6B000EBE50 /* UIColorExtension.swift in Sources */,
+				7C2776071FEB0E61008B5163 /* colorTableViewCell.swift in Sources */,
 				7C2DCB6A1FBE03BD00241CE0 /* ColorLab.xcdatamodeld in Sources */,
 				7C2DCB621FBE03BD00241CE0 /* AppDelegate.swift in Sources */,
 			);
@@ -419,6 +427,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C966N2GNTD;
 				INFOPLIST_FILE = ColorLab/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikhail.ColorLab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -435,6 +444,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C966N2GNTD;
 				INFOPLIST_FILE = ColorLab/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikhail.ColorLab;
 				PRODUCT_NAME = "$(TARGET_NAME)";

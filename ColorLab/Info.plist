@@ -32,6 +32,17 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Saved Colors</string>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>star</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.mikhail.ColorLab.openSaved</string>
+		</dict>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

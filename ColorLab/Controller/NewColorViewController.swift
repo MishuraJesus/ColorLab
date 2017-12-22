@@ -26,18 +26,25 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var greenTextField: UITextField!
     @IBOutlet weak var blueTextField: UITextField!
     
+    @IBOutlet weak var saveButton: UIButton!
+    
     var textFieldTag: Int! // TextField tag: 0 - red, 1 - greeen, 2 - blue
     
     var hexValueIsCorrect = true { // If hexTextField text consists only from hex letter - true, else - false
         didSet {
             if hexValueIsCorrect {
                 hexView.layer.borderWidth = 0
+                saveButton.isEnabled = true
+                
             } else {
+                saveButton.isEnabled = false
                 hexView.layer.borderWidth = 1
                 hexView.layer.borderColor = UIColor.red.cgColor
             }
         }
     }
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +63,7 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
         colorView.addGestureRecognizer(tapShowFullColor)
         
         addDoneButtonOnKeyboard()
+        
     }
     
     @objc func dissmissKeyboard() {
@@ -65,6 +73,13 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Show Full Color
     @objc func showFullColor() {
         performSegue(withIdentifier: "showColor", sender: nil)
+    }
+    
+    //MARK: - Methods
+    func updateColorUI(red: CGFloat, green: CGFloat, blue: CGFloat) {
+        colorView.backgroundColor = UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)
+        hexTextField.text = colorView.backgroundColor!.toHexString
+        hexView.backgroundColor = UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 0.2)
     }
     
     //MARK: - Done Button
@@ -112,50 +127,41 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
     {
         // Check that textField is not the hexTextField not to invoke animation
         if (textField != hexTextField) {
-        
-        self.animateTextField(up: true)
-        
-        switch textField {
+            
+            self.animateTextField(up: true)
+            
+            switch textField {
             case redTextField: textFieldTag = 0
             case greenTextField: textFieldTag = 1
             case blueTextField: textFieldTag = 2
             default: return
-        }
+            }
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField)
     {
-//        if textField == hexTextField {
-//            if (!hexValueIsCorrect) {
-//                hexView.layer.borderWidth = 1
-//                hexView.layer.borderColor = UIColor.red.cgColor
-//
-//        }
-//        }
         // Check that textField is not the hexTextField not to do animation related stuff
         if (textField != hexTextField) {
-        self.animateTextField(up: false)
-        
-        guard let text = textField.text else { return }
-        
-        if text == "" {
-            textField.text = "\(0)"
+            self.animateTextField(up: false)
             
-            switch textField {
-            case redTextField:
-                redSlider.value = Float(textField.text!)!
-            case greenTextField:
-                greenSlider.value = Float(textField.text!)!
-            case blueTextField:
-                blueSlider.value = Float(textField.text!)!
-            default: return
+            guard let text = textField.text else { return }
+            
+            if text == "" {
+                textField.text = "\(0)"
+                
+                switch textField {
+                case redTextField:
+                    redSlider.value = Float(textField.text!)!
+                case greenTextField:
+                    greenSlider.value = Float(textField.text!)!
+                case blueTextField:
+                    blueSlider.value = Float(textField.text!)!
+                default: return
+                }
+                
+                updateColorUI(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value))
             }
-            
-            colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
-            hexTextField.text = colorView.backgroundColor!.toHexString
-            hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
-        }
         }
     }
     
@@ -189,13 +195,14 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
             
             show(alertController, sender: nil)
             
+        } else {
+            
+            guard let text = hexTextField.text else { return }
+            
+            UIPasteboard.general.string = "#\(text)"
+            
+            self.view.makeToast("HEX Copied", duration: 2.0, point: CGPoint(x: self.view.bounds.size.width / 2.0, y: hexView.frame.maxY + 30.0), title: nil, image: nil, style: ToastStyle(), completion: nil)
         }
-        
-        guard let text = hexTextField.text else { return }
-        
-        UIPasteboard.general.string = "#\(text)"
-        
-        self.view.makeToast("HEX Copied", duration: 2.0, point: CGPoint(x: self.view.bounds.size.width / 2.0, y: hexView.frame.maxY + 30.0), title: nil, image: nil, style: ToastStyle(), completion: nil)
         
     }
     
@@ -225,9 +232,7 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
         default: return
         }
         
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
-        hexTextField.text = colorView.backgroundColor!.toHexString
-        hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
+        updateColorUI(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value))
     }
     
     @IBAction func rgbTextFieldEditingChanged(sender: Any) {
@@ -248,12 +253,10 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
             greenSlider.value = Float(textField.text!)!
         case blueTextField:
             blueSlider.value = Float(textField.text!)!
-            default: return
+        default: return
         }
         
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1.0)
-        hexTextField.text = colorView.backgroundColor!.toHexString
-        hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
+        updateColorUI(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value))
     }
     
     @IBAction func hexTextFieldEditingChanged(sender: Any) {
@@ -298,7 +301,7 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
             } else {
                 hexValueIsCorrect = false
             }
-        } else if text.count > 6 {
+        } else {
             hexValueIsCorrect = false
         }
     }
@@ -318,9 +321,54 @@ class NewColorViewController: UIViewController, UITextFieldDelegate {
         greenTextField.text = "\(green)"
         blueTextField.text = "\(blue)"
         
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
-        hexTextField.text = colorView.backgroundColor!.toHexString
-        hexView.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 0.2)
+        updateColorUI(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value))
+    }
+    
+    @IBAction func saveButtonTapped(sender: Any) {
+        var name = String()
+        var date = Date()
+        var color = UIColor()
+        var hex = String()
+        var rgb = String()
+        
+        let alertControllet = UIAlertController(title: "Enter the Name", message: nil, preferredStyle: .alert)
+        alertControllet.addTextField { (textField) in
+            textField.placeholder = "Name..."
+        }
+        let confirmAction = UIAlertAction(title: "Save", style: .default) { (action) in
+            if let textFieldArray = alertControllet.textFields, let textField = textFieldArray.first {
+                if let text = textField.text {
+                    name = text.isEmpty ? "#\(self.hexTextField.text!)" : text
+                } else {
+                    name = "#\(self.hexTextField.text!)"
+                }
+            }
+            date = Date()
+            color = self.colorView.backgroundColor!
+            hex = "#\(self.hexTextField.text!)"
+            rgb = "\(self.redTextField.text!),\(self.greenTextField.text!),\(self.blueTextField.text!)"
+            
+            let newEntry = Color(context: self.context)
+            newEntry.name = name
+            newEntry.date = date
+            newEntry.color = color
+            newEntry.hex = hex
+            newEntry.rgb = rgb
+            
+            do {
+                try self.context.save()
+            } catch let error as NSError {
+                fatalError("Error during saving of a new color: \(error), description: \(error.description)")
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertControllet.addAction(confirmAction)
+        alertControllet.addAction(cancelAction)
+        
+        show(alertControllet, sender: nil)
+        
     }
 }
 

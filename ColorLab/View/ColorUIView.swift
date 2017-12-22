@@ -11,7 +11,8 @@ import UIKit
 class ColorUIView: UIView {
     
     override func awakeFromNib() {
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.frame.height / 2
+        
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 20
     }
 }
