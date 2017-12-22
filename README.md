@@ -1,5 +1,6 @@
 # ColorLab v1.0
-**ColorLab** is an app for designers. Easily create new colors, save and share to colleges.
+**ColorLab** is an app for creators. Easily create new colors, save and share with colleagues.<br/>
+*"It's not just a splash. It's your creation"*
 
 <img src="https://github.com/MishuraJesus/ColorLab/blob/master/pic.png" width="425"/> <img src="https://github.com/MishuraJesus/ColorLab/blob/master/pic2.png" width="425"/> 
 
